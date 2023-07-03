@@ -1,5 +1,5 @@
 #include "../include/Layer.h"
-
+#include <vector>
 
 class NeuralNetwork{
 public:

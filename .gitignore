@@ -1,0 +1,6 @@
+bin/*
+output/
+build/
+CMakeFiles/
+*.o
+Makefile

@@ -1,7 +1,6 @@
 #include "../include/Neuron.h"
 #include <vector>
 
-
 class Layer{
 public:
     // @constructor
