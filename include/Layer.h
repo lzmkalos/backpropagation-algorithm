@@ -1,3 +1,4 @@
+// Layer.h
 #pragma once
 #include "Neuron.h"
 #include <vector>
@@ -9,6 +10,8 @@ public:
 
     // @getters
     std::vector<double> getOutputs() const;
+    Neuron& operator[](int index); // add this line
+    int size() const; // add this line
 
     // @methods
     void feedForward(const Layer &prevLayer);

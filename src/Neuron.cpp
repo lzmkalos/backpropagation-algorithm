@@ -24,10 +24,12 @@ Neuron::Neuron(double value, int index, int numOutputNeurons){
 // -> @setters
 void Neuron::setOutputValue(double outValue){ this->outputValue = outValue; };
 void Neuron::setActivatedValue(double actValue){ this->activatedValue = actValue; };
+void Neuron::setGradient(double gradient){ this->gradient = gradient; };
 
 // -> @getters
 double Neuron::getOutputValue(){ return this->outputValue; };
 double Neuron::getActivatedValue(){ return this->activatedValue; };
+double Neuron::getGradient(){ return this->gradient; };
 
 // -> @methods
 
@@ -45,7 +47,7 @@ void Neuron::feedForward(std::vector<Neuron>& previousLayer){
 };
 
 // sum the derivative of the weights of the next layer
-double Neuron::sumDOW(const Layer &nextLayer) {
+double Neuron::sumDOW(std::vector<Neuron> &nextLayer) {
     double sum = 0.0;
     for (int n = 0; n < nextLayer.size() - 1; ++n) {
         sum += connectionWeights[n].weight * nextLayer[n].gradient;
@@ -65,22 +67,19 @@ void Neuron::calculateOutputGradients(double targetVal) {
 }
 
 // calculate gradients for hidden neurons
-void Neuron::calculateHiddenGradients(const Layer &nextLayer) {
+void Neuron::calculateHiddenGradients(std::vector<Neuron> &nextLayer) {
     double dow = sumDOW(nextLayer);
     this->setGradient(dow * Neuron::sigmoidDerivative(this->getOutputValue()));
 }
 
 // update input weights
-void Neuron::updateInputWeights(Layer &prevLayer) {
+void Neuron::updateInputWeights(std::vector<Neuron> &prevLayer) {
     // The weights to be updated are in the Connection container
     // in the neurons in the preceding layer
     for (int n = 0; n < prevLayer.size(); ++n) {
         Neuron &neuron = prevLayer[n];
         double oldDeltaWeight = neuron.connectionWeights[this->index].deltaWeight;
 
-        double newDeltaWeight = eta * neuron.getOutputVal() * this->gradient + alpha * oldDeltaWeight;
-
-        neuron.connectionWeights[this->index].deltaWeight = newDeltaWeight;
         neuron.connectionWeights[this->index].weight += newDeltaWeight;
     };
 };

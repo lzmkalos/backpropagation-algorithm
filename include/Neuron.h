@@ -7,6 +7,7 @@ private:
     double value;
     double outputValue; // value before activation function
     double activatedValue; // value after activation function
+    double gradient;
     
     static double sigmoid(double x);
     static double sigmoidDerivative(double x);
@@ -30,8 +31,8 @@ public:
 
     // @methods
     void feedForward(std::vector<Neuron>& previousLayer);
-    void calculateOutputGradients(double targetValue);
-    void calculateHiddenGradients(const Layer& nextLayer);
-    void updateInputWeights(Layer& previousLayer);
-    double sumDOW(const Layer& nextLayer);
+    void calculateOutputGradients(double targetVal);
+    void calculateHiddenGradients(std::vector<Neuron>& nextLayer);
+    void updateInputWeights(std::vector<Neuron>& previousLayer);
+    double sumDOW(std::vector<Neuron>& nextLayer);
 };

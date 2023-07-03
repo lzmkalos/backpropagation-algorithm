@@ -19,6 +19,14 @@ std::vector<double> Layer::getOutputs() const {
     return outputs;
 }
 
+Neuron& Layer::operator[](int index) { // add this function
+    return neurons[index];
+}
+
+int Layer::size() const { // add this function
+    return neurons.size();
+}
+
 // @methods
 void Layer::feedForward(const Layer &prevLayer) {
     for (int i = 0; i < neurons.size(); ++i) {
