@@ -1,32 +1,22 @@
-#include <iostream>
-
 #include "../include/NeuralNetwork.h"
 
+#include <iostream>
+#include <cmath>
+
 NeuralNetwork::NeuralNetwork(std::vector<int> topology) {
-    // Inicializa las capas de la red neuronal basándose en la topología dada
-    std::cout << "Hola mano" << std::endl;
-    for(auto el : topology) {
-        std::cout << el << std::endl;
+    // initialize the topology of the network based on the given topology
+    for(int i = 0; i < topology.size(); i++) {
+        layers.push_back(Layer(topology[i]));
     };
-}
+};
 
-void NeuralNetwork::setCurrentInputLayer(std::vector<double> inputLayer) {
-    // Establece la capa de entrada actual a los puntos de entrada dados
-    for(auto el : inputLayer) {
-        std::cout << el << std::endl;
-    };
-}
+void NeuralNetwork::setCurrentInputLayer(std::vector<double> inputLayer) { this->inputLayer = inputLayer; };
 
-void NeuralNetwork::setCurrentTargetLayer(std::vector<double> targetLayer) {
-    // Establece la capa objetivo actual a los puntos objetivo dados
-    for(auto el : targetLayer) {
-        std::cout << el << std::endl;
-    };
-}
+void NeuralNetwork::setCurrentTargetLayer(std::vector<double> targetLayer) { this->targetLayer = targetLayer; };
 
 void NeuralNetwork::feedForward() {
-    // Propaga los valores de entrada a través de la red
-}
+
+};
 
 void NeuralNetwork::backPropagation() {
     // Ajusta los pesos de la red basándose en el error entre la salida de la red y los valores objetivo
